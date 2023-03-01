@@ -1,0 +1,2245 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>esGame</name>
+    <events>
+        <variable constant="0" name="Timer" sid="429421600953273" static="0" type="number">0</variable>
+        <variable constant="0" name="BestTime" sid="8481330524873739" static="0" type="number">0</variable>
+        <variable constant="0" name="BossLevel" sid="8286511412820069" static="0" type="number">1</variable>
+        <variable constant="0" name="BossTimer" sid="9047738832172865" static="0" type="number">0</variable>
+        <variable constant="0" name="Chance" sid="3887120799599903" static="0" type="number">0</variable>
+        <variable constant="0" name="IsFlipped" sid="8670342915526537" static="0" type="number">0</variable>
+        <variable constant="0" name="DeathCounter" sid="9463974064565242" static="0" type="number">0</variable>
+        <variable constant="0" name="Reached" sid="4705153891489605" static="0" type="number">0</variable>
+        <variable constant="0" name="Layout" sid="9519163845351097" static="0" type="number">1</variable>
+        <event-group description="" sid="9408089549280613" title="Layout">
+            <sub-events>
+                <event-block sid="6415093011467173">
+                    <conditions>
+                        <condition id="-2" name="On start of layout" sid="1794712188204797" type="System" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Jumpthru" id="0" name="Set enabled" sid="7466977279668457" type="Platform">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="ScrollTo" id="1" name="Set enabled" sid="7254901217508926" type="Player">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="0" name="Set text" sid="7990227509351674" type="TxtDeaths">
+                            <param id="0" name="Text">&quot;Deaths: &quot; &amp; DeathCounter</param>
+                        </action>
+                        <action id="0" name="Set text" sid="612056993913827" type="TxtBestTime">
+                            <param id="0" name="Text">&quot;Best: &quot; &amp; BestTime</param>
+                        </action>
+                        <action id="-7" name="Set size" sid="2949064984824193" type="Player">
+                            <param id="0" name="Width">60</param>
+                            <param id="1" name="Height">60</param>
+                        </action>
+                        <action behavior="Platform" id="11" name="Set enabled" sid="8643248144864125" type="Player">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="3714435254099231" type="System">
+                            <param id="0" name="Variable">Timer</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="5" name="Check item exists" sid="8261525871849785" type="LocalStorage">
+                            <param id="0" name="Key">&quot;BestTime&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5989514502460567">
+                    <conditions>
+                        <condition id="10" name="On item missing" sid="4264835145574959" type="LocalStorage">
+                            <param id="0" name="Key">&quot;BestTime&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set item" sid="4453939028745716" type="LocalStorage">
+                            <param id="0" name="Key">&quot;BestTime&quot;</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8510527407071668">
+                    <conditions>
+                        <condition id="9" name="On item exists" sid="4111150445505514" type="LocalStorage">
+                            <param id="0" name="Key">&quot;BestTime&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Get item" sid="5582909019957342" type="LocalStorage">
+                            <param id="0" name="Key">&quot;BestTime&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5620646010080939">
+                    <conditions>
+                        <condition id="1" name="On item get" sid="9886008963711186" type="LocalStorage">
+                            <param id="0" name="Key">&quot;BestTime&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="4952286237960493" type="System">
+                            <param id="0" name="Variable">BestTime</param>
+                            <param id="1" name="Value">LocalStorage.ItemValue</param>
+                        </action>
+                        <action id="0" name="Set text" sid="6099869256516169" type="TxtBestTime">
+                            <param id="0" name="Text">&quot;Record: &quot; &amp; BestTime</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6362610074240053">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="850202359884218" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-28" name="Set canvas size" sid="1687987853735264" type="System">
+                            <param id="0" name="Width">1280</param>
+                            <param id="1" name="Height">720</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="5698802555462627" type="System">
+                            <param id="0" name="Group name">&quot;Fireball&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="733395314034366" type="System">
+                            <param id="0" name="Group name">&quot;PlatformRespawn&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="2819498326059554" type="System">
+                            <param id="0" name="Group name">&quot;ExtraMode&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="1833145006389326" type="System">
+                            <param id="0" name="Group name">&quot;Boss&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="238683237012615" type="System">
+                            <param id="0" name="Variable">BossLevel</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="1076008563970627" type="Platform">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="11" name="Set collisions enabled" sid="4514223887980586" type="Platform">
+                            <param id="0" name="Collisions">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="9828728500929781">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="1264542570778479" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-28" name="Set canvas size" sid="4112997218579924" type="System">
+                            <param id="0" name="Width">1280</param>
+                            <param id="1" name="Height">720</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="4373890880335053" type="System">
+                            <param id="0" name="Group name">&quot;Fireball&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="5705196304202208" type="System">
+                            <param id="0" name="Group name">&quot;PlatformRespawn&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="9140585795499977" type="System">
+                            <param id="0" name="Group name">&quot;Boss&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="5741142077102886" type="System">
+                            <param id="0" name="Group name">&quot;ExtraMode&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="1040367581646601" type="System">
+                            <param id="0" name="Variable">BossLevel</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="2683999538751026" type="Platform">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="11" name="Set collisions enabled" sid="8653500172273149" type="Platform">
+                            <param id="0" name="Collisions">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="922666199539327">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="9626908049323382" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-28" name="Set canvas size" sid="7542234216401574" type="System">
+                            <param id="0" name="Width">720</param>
+                            <param id="1" name="Height">1280</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="1353923412941162" type="System">
+                            <param id="0" name="Variable">Reached</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="8570248439710595" type="System">
+                            <param id="0" name="Group name">&quot;Fireball&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="4722357789344967" type="System">
+                            <param id="0" name="Group name">&quot;PlatformRespawn&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="4939606629431624" type="System">
+                            <param id="0" name="Group name">&quot;Boss&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="5963804469600444" type="System">
+                            <param id="0" name="Group name">&quot;ExtraMode&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="6531556307341893" type="System">
+                            <param id="0" name="Variable">BossLevel</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="4222822244386508" type="Platform">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="11" name="Set collisions enabled" sid="2924391449139143" type="Platform">
+                            <param id="0" name="Collisions">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="116764489135851">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="74907916354868" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-28" name="Set canvas size" sid="5475469059489802" type="System">
+                            <param id="0" name="Width">1280</param>
+                            <param id="1" name="Height">720</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="4228720044590789" type="System">
+                            <param id="0" name="Variable">Reached</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="9011998856276079" type="RisingLava">
+                            <param id="0" name="Angle">270</param>
+                        </action>
+                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="6956518551559388" type="BorderTop">
+                            <param id="0" name="Angle">270</param>
+                        </action>
+                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="3682697837342257" type="ScrollTo">
+                            <param id="0" name="Angle">270</param>
+                        </action>
+                        <action behavior="ScrollTo" id="1" name="Set enabled" sid="3300957025273802" type="Player">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action behavior="ScrollTo" id="1" name="Set enabled" sid="9614507603051656" type="ScrollTo">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="2750856874569429" type="ScrollTo">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="4215969073213146" type="BorderTop">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="5904137483861169" type="System">
+                            <param id="0" name="Seconds">1.5</param>
+                        </action>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="347900541941666" type="RisingLava">
+                            <param id="0" name="Speed">50</param>
+                        </action>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="1044961717241421" type="BorderTop">
+                            <param id="0" name="Speed">50</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="6495201854836236" type="System">
+                            <param id="0" name="Seconds">2</param>
+                        </action>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="790124429762878" type="ScrollTo">
+                            <param id="0" name="Speed">50</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="6202833824003109" type="System">
+                            <param id="0" name="Group name">&quot;Fireball&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="9092019352323116" type="System">
+                            <param id="0" name="Group name">&quot;PlatformRespawn&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="4427643064722051" type="System">
+                            <param id="0" name="Group name">&quot;Boss&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="9145317952066018" type="System">
+                            <param id="0" name="Group name">&quot;ExtraMode&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="9828900497583034" type="System">
+                            <param id="0" name="Variable">BossLevel</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="8377509391250905" type="Platform">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="11" name="Set collisions enabled" sid="8344019760325105" type="Platform">
+                            <param id="0" name="Collisions">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6624907414012719">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="9964673157840737" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">4</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-28" name="Set canvas size" sid="1458308802090046" type="System">
+                            <param id="0" name="Width">1280</param>
+                            <param id="1" name="Height">720</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="7413956523519172" type="System">
+                            <param id="0" name="Variable">Reached</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="1094474391128792" type="System">
+                            <param id="0" name="Group name">&quot;Fireball&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="6629232927488044" type="System">
+                            <param id="0" name="Group name">&quot;PlatformRespawn&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="4840891142386889" type="System">
+                            <param id="0" name="Group name">&quot;Boss&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="1725128682902303" type="System">
+                            <param id="0" name="Group name">&quot;ExtraMode&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="3607599652260819" type="Platform">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="11" name="Set collisions enabled" sid="6763551437657931" type="Platform">
+                            <param id="0" name="Collisions">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="2268465288777515">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="2098513361157187" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">5</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-28" name="Set canvas size" sid="9054568197468219" type="System">
+                            <param id="0" name="Width">1280</param>
+                            <param id="1" name="Height">720</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="4318723184603573" type="System">
+                            <param id="0" name="Group name">&quot;Fireball&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="2938021993668021" type="System">
+                            <param id="0" name="Group name">&quot;PlatformRespawn&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="4563312786807745" type="System">
+                            <param id="0" name="Group name">&quot;Boss&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="2326094734135224" type="System">
+                            <param id="0" name="Group name">&quot;ExtraMode&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="0" name="Set text" sid="9917023940721919" type="TxtTimer">
+                            <param id="0" name="Text">&quot;Time: &quot; &amp; Timer</param>
+                        </action>
+                        <action id="0" name="Set text" sid="958004003206713" type="TxtBestTime">
+                            <param id="0" name="Text">&quot;Record: &quot; &amp; BestTime</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="2609612831537917">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="6763540612750086" type="Keyboard">
+                            <param id="0" name="Key">38</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="7285587467222469" type="Player">
+                            <param id="0" name="Object">GoTo0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="6328903447599068" type="System">
+                            <param id="0" name="Layout">Level_00</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="4134432675573507" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="6796961838596174" type="System">
+                            <param id="0" name="Variable">Reached</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="4124142517766277">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="7759005678984627" type="System">
+                                    <param id="0" name="Variable">LevelBeat</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="6285216467312118" type="System">
+                                    <param id="0" name="Variable">LevelBeat</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="0" name="Set item" sid="1618399870376034" type="LocalStorage">
+                                    <param id="0" name="Key">&quot;LevelBeat&quot;</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="3512139551788671">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="3113963347606132" type="Keyboard">
+                            <param id="0" name="Key">38</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="408712736817797" type="Player">
+                            <param id="0" name="Object">GoTo1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="668307231410248" type="System">
+                            <param id="0" name="Layout">Level_01</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="9064221259344133" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="9440744940230859" type="System">
+                            <param id="0" name="Variable">Reached</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="7647775908164153">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="7261087580440964" type="System">
+                                    <param id="0" name="Variable">LevelBeat</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="8458959873440352" type="System">
+                                    <param id="0" name="Variable">LevelBeat</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="0" name="Set item" sid="9771212131176592" type="LocalStorage">
+                                    <param id="0" name="Key">&quot;LevelBeat&quot;</param>
+                                    <param id="1" name="Value">2</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="3909728011954996">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="6228035684390041" type="Keyboard">
+                            <param id="0" name="Key">38</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="957896975130289" type="Player">
+                            <param id="0" name="Object">GoTo2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="4257186334621169" type="System">
+                            <param id="0" name="Layout">Level_02</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="5428569660564339" type="System">
+                            <param id="0" name="Variable">Reached</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="871005716407813" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="1858168640848415">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="6007398205595594" type="System">
+                                    <param id="0" name="Variable">LevelBeat</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Value">3</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="1333124405720281" type="System">
+                                    <param id="0" name="Variable">LevelBeat</param>
+                                    <param id="1" name="Value">2</param>
+                                </action>
+                                <action id="0" name="Set item" sid="6555182400423759" type="LocalStorage">
+                                    <param id="0" name="Key">&quot;LevelBeat&quot;</param>
+                                    <param id="1" name="Value">3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="9916030968182987">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="9633889153436208" type="Keyboard">
+                            <param id="0" name="Key">38</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="1422570224187803" type="Player">
+                            <param id="0" name="Object">GoTo3</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="3426583046188531" type="System">
+                            <param id="0" name="Layout">Level_03</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="9282516828687129" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Value">3</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="9223648091602098">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="5200560652013001" type="System">
+                                    <param id="0" name="Variable">LevelBeat</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="2374241816268832" type="System">
+                                    <param id="0" name="Variable">LevelBeat</param>
+                                    <param id="1" name="Value">3</param>
+                                </action>
+                                <action id="0" name="Set item" sid="8771224433866517" type="LocalStorage">
+                                    <param id="0" name="Key">&quot;LevelBeat&quot;</param>
+                                    <param id="1" name="Value">4</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="613894739565827">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="3906204887931356" type="Keyboard">
+                            <param id="0" name="Key">38</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="577007980371924" type="Player">
+                            <param id="0" name="Object">GoToBoss</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="5138318375846564" type="System">
+                            <param id="0" name="Layout">Level_Boss</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="7017369835124433" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Value">4</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="3821089220450486">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="7647858236350062" type="System">
+                                    <param id="0" name="Variable">LevelBeat</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Value">5</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="9386844414495056" type="System">
+                                    <param id="0" name="Variable">LevelBeat</param>
+                                    <param id="1" name="Value">4</param>
+                                </action>
+                                <action id="0" name="Set item" sid="3646742639265501" type="LocalStorage">
+                                    <param id="0" name="Key">&quot;LevelBeat&quot;</param>
+                                    <param id="1" name="Value">5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="6339744257242138">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="1221525817389499" type="Player">
+                            <param id="0" name="Object">SetLayout0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="3258293242489181" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="5389119200869453" type="System">
+                            <param id="0" name="Group name">&quot;ExtraMode&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="8635166089969337" type="System">
+                            <param id="0" name="Group name">&quot;Boss&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="2130202162950242">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="6515781772787613" type="Player">
+                            <param id="0" name="Object">SetLayout1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="170942730398308" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="8551080513500229" type="System">
+                            <param id="0" name="Group name">&quot;ExtraMode&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="7120287527677226" type="System">
+                            <param id="0" name="Group name">&quot;Boss&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="9184243905829954">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="7994302753586398" type="Player">
+                            <param id="0" name="Object">SetLayout2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="6559501736267612" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="3970750337441375" type="System">
+                            <param id="0" name="Group name">&quot;ExtraMode&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="5061636917389424" type="System">
+                            <param id="0" name="Group name">&quot;Boss&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="3265888835888617">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="3294319616453385" type="Player">
+                            <param id="0" name="Object">SetLayout3</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="3143460636159846" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Value">3</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="4338894342104259" type="System">
+                            <param id="0" name="Group name">&quot;ExtraMode&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="1625870087046216" type="System">
+                            <param id="0" name="Group name">&quot;Boss&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="7162034523449651">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="1492316250825845" type="Player">
+                            <param id="0" name="Object">SetLayout4</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="6254811511043138" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Value">4</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="1096565101258842" type="System">
+                            <param id="0" name="Group name">&quot;ExtraMode&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="5146431918483989" type="System">
+                            <param id="0" name="Group name">&quot;Boss&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6711603994417528">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="7551408798624735" type="Player">
+                            <param id="0" name="Object">SetLayout5</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="9396266446257453" type="System">
+                            <param id="0" name="Variable">Layout</param>
+                            <param id="1" name="Value">5</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="8371054394524973" type="System">
+                            <param id="0" name="Group name">&quot;ExtraMode&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="5545515344074273" type="System">
+                            <param id="0" name="Group name">&quot;Boss&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="0" name="Set item" sid="2036698010059937" type="LocalStorage">
+                            <param id="0" name="Key">&quot;BestTime&quot;</param>
+                            <param id="1" name="Value">BestTime</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="7318531864522545" title="OutsideLayout">
+            <sub-events>
+                <event-block sid="4613177146844133">
+                    <conditions>
+                        <condition id="-4" name="Is outside layout" sid="1563541586134316" type="CannonBall" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="4653593127804514" type="CannonBall" />
+                    </actions>
+                </event-block>
+                <event-block sid="1775632428547062">
+                    <conditions>
+                        <condition id="-4" name="Is outside layout" sid="1176710697560048" type="FallingPlatform" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="1025464318572181" type="FallingPlatform" />
+                    </actions>
+                </event-block>
+                <event-block sid="8929215087102093">
+                    <conditions>
+                        <condition id="-4" name="Is outside layout" sid="2036167311936449" type="WideFalling" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="775094419745929" type="WideFalling" />
+                    </actions>
+                </event-block>
+                <event-block sid="3944694099912785">
+                    <conditions>
+                        <condition id="-4" name="Is outside layout" sid="4360684462024444" type="BossFireball" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="6725553681753463" type="BossFireball" />
+                    </actions>
+                </event-block>
+                <event-block sid="6703624180648802">
+                    <conditions>
+                        <condition id="-4" name="Is outside layout" sid="6464990200422648" type="TurretLaser" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="8500083138443538" type="TurretLaser" />
+                    </actions>
+                </event-block>
+                <event-block sid="1605307475017434">
+                    <conditions>
+                        <condition id="-4" name="Is outside layout" sid="4229311748866418" type="DestroyGround" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="2689972977544795" type="DestroyGround" />
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="4963000908882295" title="On Colision">
+            <sub-events>
+                <event-block any="1" sid="1621061821304133">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="2172133915438995" type="Player">
+                            <param id="0" name="Object">Spike</param>
+                        </condition>
+                        <condition id="0" name="On collision with another object" sid="8139114552256566" type="Player">
+                            <param id="0" name="Object">CannonBall</param>
+                        </condition>
+                        <condition id="0" name="On collision with another object" sid="1864002661426127" type="Player">
+                            <param id="0" name="Object">Lava</param>
+                        </condition>
+                        <condition id="0" name="On collision with another object" sid="8649214356127738" type="Player">
+                            <param id="0" name="Object">RisingLava</param>
+                        </condition>
+                        <condition id="0" name="On collision with another object" sid="7195002176789019" type="Player">
+                            <param id="0" name="Object">SmallSpike</param>
+                        </condition>
+                        <condition id="0" name="On collision with another object" sid="2775206095694531" type="Player">
+                            <param id="0" name="Object">FireBall</param>
+                        </condition>
+                        <condition id="0" name="On collision with another object" sid="3101801845516393" type="Player">
+                            <param id="0" name="Object">DestroyGround</param>
+                        </condition>
+                        <condition id="0" name="On collision with another object" sid="707327833758285" type="Player">
+                            <param id="0" name="Object">TurretLaser</param>
+                        </condition>
+                        <condition id="0" name="On collision with another object" sid="3455272119126562" type="Player">
+                            <param id="0" name="Object">BossFireball</param>
+                        </condition>
+                        <condition id="-4" name="Is outside layout" sid="6075480533194044" type="Player" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="2719368445291613" type="Player" />
+                        <action id="-10" name="Add to" sid="1786999250167013" type="System">
+                            <param id="0" name="Variable">DeathCounter</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="0" name="Set text" sid="3574720834227916" type="TxtDeaths">
+                            <param id="0" name="Text">&quot;Deaths: &quot; &amp; DeathCounter</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="796425320116167" type="System">
+                            <param id="0" name="Variable">IsFlipped</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="5102567417610382" type="System">
+                            <param id="0" name="Variable">BossTimer</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action behavior="Turret" id="2" name="Clear targets" sid="5277508320673021" type="DestroyTurret" />
+                        <action behavior="Turret" id="2" name="Clear targets" sid="8894922338282906" type="EyeTurret" />
+                        <action behavior="Turret" id="2" name="Clear targets" sid="8549332970168716" type="LeftTurret" />
+                        <action id="-9" name="Set value" sid="8913813925912521" type="System">
+                            <param id="0" name="Variable">BossLevel</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="7199723995159828">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="6797407280685053" type="System">
+                                    <param id="0" name="Variable">Timer</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">BestTime</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="1273790459037233" type="System">
+                                    <param id="0" name="Variable">BestTime</param>
+                                    <param id="1" name="Value">Timer</param>
+                                </action>
+                                <action id="0" name="Set text" sid="4761201801620911" type="TxtBestTime">
+                                    <param id="0" name="Text">&quot;Record: &quot; &amp; BestTime</param>
+                                </action>
+                                <action id="0" name="Set item" sid="8367258029500137" type="LocalStorage">
+                                    <param id="0" name="Key">&quot;BestTime&quot;</param>
+                                    <param id="1" name="Value">BestTime</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="1451527233325962" type="System">
+                                    <param id="0" name="Variable">Timer</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="7017795526724514">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="3019353678118072" type="System">
+                                    <param id="0" name="Variable">Reached</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-26" name="Restart layout" sid="7628270010113494" type="System" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="1095600806216377">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="9653639248582488" type="System">
+                                    <param id="0" name="Variable">Reached</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="5258189592870895">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="7321455432552285" type="System">
+                                            <param id="0" name="Variable">Layout</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Create object" sid="6292849937285993" type="System">
+                                            <param id="0" name="Object to create">Player</param>
+                                            <param id="1" name="Layer">1</param>
+                                            <param id="2" name="X">1550</param>
+                                            <param id="3" name="Y">560</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="9317651312124925">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="9731106398469413" type="System">
+                                            <param id="0" name="Variable">Layout</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Create object" sid="1155084621448159" type="System">
+                                            <param id="0" name="Object to create">Player</param>
+                                            <param id="1" name="Layer">1</param>
+                                            <param id="2" name="X">3165</param>
+                                            <param id="3" name="Y">240</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="6196359906396951">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="1566043237976384" type="CannonBall">
+                            <param id="0" name="Object">Block</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="8594129159163683" type="CannonBall" />
+                    </actions>
+                </event-block>
+                <event-block sid="2813292673387837">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="4413167869715497" type="Player">
+                            <param id="0" name="Object">FallingPlatform</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="8783876466744042" type="System">
+                            <param id="0" name="Seconds">0.2</param>
+                        </action>
+                        <action behavior="Bullet" id="2" name="Set gravity" sid="785166906386879" type="FallingPlatform">
+                            <param id="0" name="Gravity">400</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="8599776940984378">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="2622583803976042" type="System">
+                                    <param id="0" name="Variable">IsFlipped</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Wait" sid="7624845347280174" type="System">
+                                    <param id="0" name="Seconds">0.1</param>
+                                </action>
+                                <action behavior="Bullet" id="2" name="Set gravity" sid="237930868740308" type="FallingPlatform">
+                                    <param id="0" name="Gravity">400</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="9069140498843951">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="3864415523418954" type="System">
+                                    <param id="0" name="Variable">IsFlipped</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Wait" sid="9933437593538758" type="System">
+                                    <param id="0" name="Seconds">0.1</param>
+                                </action>
+                                <action behavior="Bullet" id="2" name="Set gravity" sid="7156022765283059" type="FallingPlatform">
+                                    <param id="0" name="Gravity">-400</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="9699385118020709">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="8674761245124992" type="Player">
+                            <param id="0" name="Object">WideFalling</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Bullet" id="2" name="Set gravity" sid="7792686595208846" type="WideFalling">
+                            <param id="0" name="Gravity">400</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="884001689859368">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="5706279565934599" type="Player">
+                            <param id="0" name="Object">Checkpoint</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="2159123236960576" type="System">
+                            <param id="0" name="Variable">Reached</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="8393932494289905" type="Checkpoint">
+                            <param id="0" name="Animation">&quot;Reached&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="3032013547142719">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="3597024592868657" type="Player">
+                            <param id="0" name="Object">TripWireBlock</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Spawn another object" sid="9039789119898984" type="TripCannon">
+                            <param id="0" name="Object">CannonBall</param>
+                            <param id="1" name="Layer">1</param>
+                            <param id="2" name="Image point">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="1991615610734288" title="Fireball">
+            <sub-events>
+                <event-block sid="5018930864534282">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="9033145580639055" type="FireBall">
+                            <param id="0" name="Object">FireBallBase</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="8975666771929161" type="FireBall">
+                            <param id="0" name="Speed">425</param>
+                        </action>
+                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="6008377341660995" type="FireBall">
+                            <param id="0" name="Angle">270</param>
+                        </action>
+                        <action behavior="Bullet" id="2" name="Set gravity" sid="9694342256425094" type="FireBall">
+                            <param id="0" name="Gravity">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6299561686355195">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="4530409825850414" type="FireBall">
+                            <param id="0" name="Object">FireBallPeak</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Bullet" id="2" name="Set gravity" sid="1916741176071221" type="FireBall">
+                            <param id="0" name="Gravity">400</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="2639903561811389" title="PlatformRespawn">
+            <sub-events>
+                <event-block sid="7529863988800137">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="572994814333739" type="System">
+                            <param id="0" name="Interval (seconds)">2</param>
+                        </condition>
+                        <condition id="1" inverted="1" name="Is overlapping another object" sid="6318762198324469" type="CheckWidePlatform">
+                            <param id="0" name="Object">WideFalling</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="9087729594246369" type="System">
+                            <param id="0" name="Seconds">1</param>
+                        </action>
+                        <action id="0" name="Spawn another object" sid="6250327284583204" type="CheckWidePlatform">
+                            <param id="0" name="Object">WideFalling</param>
+                            <param id="1" name="Layer">1</param>
+                            <param id="2" name="Image point">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8223946033127723">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="2471670861212209" type="System">
+                            <param id="0" name="Interval (seconds)">2</param>
+                        </condition>
+                        <condition id="1" inverted="1" name="Is overlapping another object" sid="5601334662134328" type="CheckPlatform">
+                            <param id="0" name="Object">FallingPlatform</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="1132930522802953" type="System">
+                            <param id="0" name="Seconds">1</param>
+                        </action>
+                        <action id="0" name="Spawn another object" sid="3876949391741937" type="CheckPlatform">
+                            <param id="0" name="Object">FallingPlatform</param>
+                            <param id="1" name="Layer">1</param>
+                            <param id="2" name="Image point">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="6684319031978279" title="PlayerAnimations">
+            <sub-events>
+                <event-block sid="7153082562066434">
+                    <conditions>
+                        <condition behavior="Platform" id="7" name="On stopped" sid="1577523069458196" type="Player" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="2746590012691837" type="Player">
+                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="662307970476455">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="3877576888171534" type="Keyboard">
+                            <param id="0" name="Key">39</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="7555743979105934" type="Player">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6025197148643465">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="9018588529143038" type="Keyboard">
+                            <param id="0" name="Key">37</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="537447626188107" type="Player">
+                            <param id="0" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5669631847213682">
+                    <conditions>
+                        <condition behavior="Platform" id="5" name="On jump" sid="633561250662268" type="Player" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="4039622299463295" type="Player">
+                            <param id="0" name="Animation">&quot;Jump&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="7505130179104553">
+                    <conditions>
+                        <condition behavior="Platform" id="9" name="On landed" sid="2159249310690797" type="Player" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="7599924640127143">
+                            <conditions>
+                                <condition behavior="Platform" id="0" name="Is moving" sid="8581429273647169" type="Player" />
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="4497682131427431" type="Player">
+                                    <param id="0" name="Animation">&quot;Walk&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action behavior="Platform" id="1" name="Set max speed" sid="7039626378274821" type="Player">
+                                    <param id="0" name="Max Speed">350</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="9203874770640154">
+                            <conditions>
+                                <condition behavior="Platform" id="0" inverted="1" name="Is moving" sid="450224868123514" type="Player" />
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="8612491232022365" type="Player">
+                                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action behavior="Platform" id="1" name="Set max speed" sid="4925370589443353" type="Player">
+                                    <param id="0" name="Max Speed">350</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="4652995106942124">
+                    <conditions>
+                        <condition behavior="Platform" id="8" name="On moved" sid="3270214891046716" type="Player" />
+                        <condition id="2" inverted="1" name="Key is down" sid="5840038798195403" type="Keyboard">
+                            <param id="0" name="Key">40</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="6314507180444968" type="Player">
+                            <param id="0" name="Animation">&quot;Walk&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action behavior="Platform" id="1" name="Set max speed" sid="7987654195395456" type="Player">
+                            <param id="0" name="Max Speed">350</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="1743926953377752">
+                    <conditions>
+                        <condition behavior="Platform" id="4" name="Is falling" sid="602392058335191" type="Player" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="1462736746610058" type="Player">
+                            <param id="0" name="Animation">&quot;Falling&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="3676250225783476">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="4436964815982754" type="Player">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Y co-ordinate">Platform.Y-0</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="5416598647208927" type="Keyboard">
+                            <param id="0" name="Key">40</param>
+                        </condition>
+                        <condition behavior="Platform" id="2" name="Is on floor" sid="223836263258855" type="Player" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Platform" id="12" name="Fall through" sid="2403119620754679" type="Player" />
+                    </actions>
+                </event-block>
+                <event-block sid="5521846527675908">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="2032542133122657" type="Keyboard">
+                            <param id="0" name="Key">40</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="1270301786666578">
+                            <conditions>
+                                <condition behavior="Platform" id="0" inverted="1" name="Is moving" sid="5049437692465507" type="Player" />
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="2577518939559022" type="Player">
+                                    <param id="0" name="Animation">&quot;Duck&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action behavior="Platform" id="1" name="Set max speed" sid="7469537672202597" type="Player">
+                                    <param id="0" name="Max Speed">200</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="6047427561101135">
+                            <conditions>
+                                <condition behavior="Platform" id="0" name="Is moving" sid="7816144760348065" type="Player" />
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="7639426142686784" type="Player">
+                                    <param id="0" name="Animation">&quot;DuckWalk&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action behavior="Platform" id="1" name="Set max speed" sid="223211871968586" type="Player">
+                                    <param id="0" name="Max Speed">200</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="8382582937009349">
+                    <conditions>
+                        <condition id="3" name="On key released" sid="9060111037677057" type="Keyboard">
+                            <param id="0" name="Key">40</param>
+                        </condition>
+                        <condition behavior="Platform" id="0" inverted="1" name="Is moving" sid="1029462463451112" type="Player" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="2017647875231086" type="Player">
+                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action behavior="Platform" id="1" name="Set max speed" sid="7243143968302327" type="Player">
+                            <param id="0" name="Max Speed">350</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8201143580966738">
+                    <conditions>
+                        <condition id="3" name="On key released" sid="9960970021511663" type="Keyboard">
+                            <param id="0" name="Key">40</param>
+                        </condition>
+                        <condition behavior="Platform" id="0" name="Is moving" sid="5069011746823479" type="Player" />
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="1983782529933927" type="Player">
+                            <param id="0" name="Animation">&quot;Walk&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action behavior="Platform" id="1" name="Set max speed" sid="7089029055402534" type="Player">
+                            <param id="0" name="Max Speed">350</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="2881512645019634" title="Boss">
+            <sub-events>
+                <event-block sid="4407459478781671">
+                    <conditions>
+                        <condition id="-3" name="Is on-screen" sid="4079167571239494" type="LeftTurret" />
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="5684522327832212" type="System">
+                            <param id="0" name="Seconds">2</param>
+                        </action>
+                        <action behavior="Turret" id="1" name="Add object to target" sid="815557191202066" type="LeftTurret">
+                            <param id="0" name="Target">Player</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="2695958802838838">
+                    <conditions>
+                        <condition id="-3" name="Is on-screen" sid="2636831757932798" type="EyeTurret" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Turret" id="1" name="Add object to target" sid="803903671866933" type="EyeTurret">
+                            <param id="0" name="Target">Player</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="3509707162222997">
+                    <conditions>
+                        <condition id="-3" name="Is on-screen" sid="5736578169531523" type="DestroyTurret" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Turret" id="1" name="Add object to target" sid="3309858573605362" type="DestroyTurret">
+                            <param id="0" name="Target">Player</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="3624455799698631">
+                    <conditions>
+                        <condition behavior="Turret" id="1" name="On shoot" sid="9446169004401372" type="LeftTurret" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Spawn another object" sid="9672519776455082" type="LeftTurret">
+                            <param id="0" name="Object">BossFireball</param>
+                            <param id="1" name="Layer">1</param>
+                            <param id="2" name="Image point">1</param>
+                        </action>
+                        <action id="0" name="Play" sid="5335810832383084" type="Audio">
+                            <param id="0" name="Audio file">SFX1</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="2223501282016974" type="LeftTurret">
+                            <param id="0" name="Animation">&quot;Shoot&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5994595964306783">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="5118369945029539" type="System">
+                            <param id="0" name="Interval (seconds)">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="4069687992600824" type="System">
+                            <param id="0" name="Variable">Chance</param>
+                            <param id="1" name="Value">floor(random(3))</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="7458591867940171">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="1240870045405225" type="System">
+                            <param id="0" name="Variable">Chance</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="5479002863517306" type="System">
+                            <param id="0" name="Variable">BossLevel</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="1092130241565539" type="System">
+                            <param id="0" name="Variable">BossTimer</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                        <condition id="-14" inverted="1" name="Compare variable" sid="3726124441528565" type="System">
+                            <param id="0" name="Variable">BossTimer</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">15</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="6547402787232541" type="EyeTurret">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="3519084955392441" type="System">
+                            <param id="0" name="Seconds">2</param>
+                        </action>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="9734759997248893" type="EyeTurret">
+                            <param id="0" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5412984366551035">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="438798600551587" type="System">
+                            <param id="0" name="Interval (seconds)">7</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="4765173770251655" type="System">
+                            <param id="0" name="Variable">BossLevel</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="8635306006465318" type="System">
+                            <param id="0" name="Variable">BossTimer</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                        <condition id="-14" inverted="1" name="Compare variable" sid="9873270882762853" type="System">
+                            <param id="0" name="Variable">BossTimer</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">15</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="1054890523819496" type="DestroyTurret">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="7108835454053205" type="BallOLighning">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="7285095894952769" type="BallOLighning">
+                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="5857713995723769" type="System">
+                            <param id="0" name="Seconds">1</param>
+                        </action>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="1307339298406865" type="DestroyTurret">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="8619736631970786" type="BallOLighning">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8301547036969111">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="890628666403099" type="System">
+                            <param id="0" name="Interval (seconds)">4</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="8821446787595341" type="System">
+                            <param id="0" name="Variable">BossLevel</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">4</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="652861513019589" type="System">
+                            <param id="0" name="Variable">BossTimer</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                        <condition id="-14" inverted="1" name="Compare variable" sid="9819438694198142" type="System">
+                            <param id="0" name="Variable">BossTimer</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">15</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="6482909453147047" type="DestroyTurret">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="7337963048600344" type="BallOLighning">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="5488124414032063" type="BallOLighning">
+                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="2884290940245513" type="System">
+                            <param id="0" name="Seconds">1</param>
+                        </action>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="2293655535560182" type="DestroyTurret">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="7507314675398221" type="BallOLighning">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6623391859691564">
+                    <conditions>
+                        <condition behavior="Turret" id="1" name="On shoot" sid="5883994776648912" type="EyeTurret" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Spawn another object" sid="8002267588615916" type="EyeTurret">
+                            <param id="0" name="Object">TurretLaser</param>
+                            <param id="1" name="Layer">1</param>
+                            <param id="2" name="Image point">1</param>
+                        </action>
+                        <action id="0" name="Play" sid="7779377089904856" type="Audio">
+                            <param id="0" name="Audio file">Lazer Fire 1</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="1987880345585961">
+                    <conditions>
+                        <condition behavior="Turret" id="1" name="On shoot" sid="8277909013952155" type="DestroyTurret" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Spawn another object" sid="3731554626726691" type="DestroyTurret">
+                            <param id="0" name="Object">DestroyGround</param>
+                            <param id="1" name="Layer">1</param>
+                            <param id="2" name="Image point">1</param>
+                        </action>
+                        <action id="0" name="Play" sid="5770075436555527" type="Audio">
+                            <param id="0" name="Audio file">Lazer Ricochet</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8847084231166354">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="754792765656817" type="DestroyGround">
+                            <param id="0" name="Object">BlockGrass</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="3508013150834053" type="BlockGrass" />
+                    </actions>
+                </event-block>
+                <event-block sid="6103046608961762">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="2868113349454077" type="DestroyGround">
+                            <param id="0" name="Object">Block</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="5691845289098687" type="Block" />
+                    </actions>
+                </event-block>
+                <event-block sid="4441731303326146">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="8693735002296927" type="System">
+                            <param id="0" name="Interval (seconds)">1.0</param>
+                        </condition>
+                        <condition id="-14" inverted="1" name="Compare variable" sid="2840218540385806" type="System">
+                            <param id="0" name="Variable">BossTimer</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">15</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Add to" sid="9656950203756529" type="System">
+                            <param id="0" name="Variable">BossTimer</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="7581413327169806">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="3627658156029663" type="System">
+                            <param id="0" name="Variable">BossTimer</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">15</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="4207513599580086" type="Warning">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="9442688109164585" type="LeftTurret">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="9265778152119907" type="EyeTurret">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="5714146937635529" type="DestroyTurret">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="234331027366176" type="Platform">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="11" name="Set collisions enabled" sid="3856702845024667" type="Platform">
+                            <param id="0" name="Collisions">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="2217415736552544" type="LeftTurret">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="3470867843683231" type="BossSky">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="11" name="Set collisions enabled" sid="8197117517260332" type="BossGround">
+                            <param id="0" name="Collisions">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="868993768285127" type="BossGround">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="4511029595666243" type="Pole">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="8465237769972208" type="Pole2">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="5735019722854465" type="DestroyTurret">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8936866920106934">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="3821115404098365" type="Player">
+                            <param id="0" name="Object">BossGround</param>
+                        </condition>
+                        <condition behavior="Platform" id="4" name="Is falling" sid="9765805572078569" type="Player" />
+                    </conditions>
+                    <actions>
+                        <action id="11" name="Set collisions enabled" sid="1174797651742301" type="BossGround">
+                            <param id="0" name="Collisions">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="9959403186069345" type="BossGround">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="1832309769266204" type="BossSky">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="810810003226823" type="LeftTurret">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="5846458837627185" type="Pole">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="9101395228374208" type="Pole2">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="8871074791373398" type="DestroyTurret">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="6164550309205106" type="System">
+                            <param id="0" name="Variable">BossTimer</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-10" name="Add to" sid="4860219798473689" type="System">
+                            <param id="0" name="Variable">BossLevel</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action behavior="Platform" id="9" name="Set vector Y" sid="8579061282351587" type="Player">
+                            <param id="0" name="Vector Y">-300</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="6243967511929787" type="Warning">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="6505855558462126" type="System">
+                            <param id="0" name="Seconds">1.0</param>
+                        </action>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="1341809064078368" type="LeftTurret">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6826561428200805">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="6945412396921595" type="System">
+                            <param id="0" name="Variable">BossLevel</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="489766924280755" type="BossGround">
+                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                            <param id="1" name="From">0</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="5612594938502181" type="BossGround">
+                            <param id="0" name="Frame number">0</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="6049835638469769" type="BossSky">
+                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                            <param id="1" name="From">0</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="8638499463601637" type="BossSky">
+                            <param id="0" name="Frame number">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="1869091337036506">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="4161824621932025" type="System">
+                            <param id="0" name="Variable">BossLevel</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="3189936661460263" type="BossGround">
+                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                            <param id="1" name="From">0</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="1491991439025235" type="BossGround">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="2497582441946338" type="BossSky">
+                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                            <param id="1" name="From">0</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="5254182763120355" type="BossSky">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6707942081898198">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="208115270530618" type="System">
+                            <param id="0" name="Variable">BossLevel</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="971843420591181" type="BossGround">
+                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                            <param id="1" name="From">0</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="1572387679231134" type="BossGround">
+                            <param id="0" name="Frame number">2</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="6028592837310596" type="BossSky">
+                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                            <param id="1" name="From">0</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="8218144905252178" type="BossSky">
+                            <param id="0" name="Frame number">2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="907662387608455">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="3105018547032769" type="System">
+                            <param id="0" name="Variable">BossLevel</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">4</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="6585180561610372" type="BossGround">
+                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                            <param id="1" name="From">0</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="4781492723841834" type="BossGround">
+                            <param id="0" name="Frame number">3</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="5395086703810695" type="BossSky">
+                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                            <param id="1" name="From">0</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="1722187968415696" type="BossSky">
+                            <param id="0" name="Frame number">3</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="7749024444173862">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="5991604940847639" type="System">
+                            <param id="0" name="Variable">BossLevel</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">5</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="5825940392650351" type="Explosion">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="1276320724893401" type="Explosion">
+                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="5963498134797431" type="BossGround">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="2876480150907839" type="BossSky">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="7228885710853498" type="BallOLighning">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action behavior="Platform" id="5" name="Set gravity" sid="9821725183442436" type="Player">
+                            <param id="0" name="Gravity">400</param>
+                        </action>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="4749033723064533" type="EyeTurret">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="3328959324188853" type="DestroyTurret">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="5450277843176688" type="DestroyTurret">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="1522212122916061" type="LeftTurret">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="2657501159263169" type="Pole">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="1675986592251879" type="Pole2">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="5467336329404617" type="LeftTurret">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="0" name="Play" sid="875416520109634" type="Audio">
+                            <param id="0" name="Audio file">Boss Death</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="7790510029645555" type="System">
+                            <param id="0" name="Variable">BossLevel</param>
+                            <param id="1" name="Value">6</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="6204499485728824" type="System">
+                            <param id="0" name="Variable">LevelBeat</param>
+                            <param id="1" name="Value">6</param>
+                        </action>
+                        <action id="0" name="Set item" sid="520281920786666" type="LocalStorage">
+                            <param id="0" name="Key">&quot;LevelBeat&quot;</param>
+                            <param id="1" name="Value">6</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="578430442033395">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="2317196718128076" type="System">
+                            <param id="0" name="Variable">BossLevel</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">6</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="9393694684843379" type="BossGround">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="8345669943810309" type="BossSky">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="9244911903687081" type="BallOLighning">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action behavior="Platform" id="5" name="Set gravity" sid="6392054525138923" type="Player">
+                            <param id="0" name="Gravity">400</param>
+                        </action>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="9090836594397485" type="EyeTurret">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="8414821014635517" type="DestroyTurret">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="8945780555474039" type="DestroyTurret">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="284383365298057" type="LeftTurret">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="2540585342583344" type="Pole">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="9683104142958293" type="Pole2">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="211897314712607" type="Platform">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="8260144116457353" type="Warning">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="4186341488012162" type="LeftTurret">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="1111959332424111" type="System">
+                            <param id="0" name="Seconds">2</param>
+                        </action>
+                        <action id="-2" name="Go to layout" sid="3641164135327783" type="System">
+                            <param id="0" name="Layout">Credits</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="7807417550478999">
+                    <conditions>
+                        <condition id="-9" name="Is visible" sid="1154011440054079" type="BallOLighning" />
+                        <condition id="-9" name="Is visible" sid="5793125377574237" type="BossGround" />
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="7104624189567975" type="BallOLighning">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="6310223014700646" title="ExtraMode">
+            <sub-events>
+                <event-block sid="7783661286913116">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="6634565044220786" type="System">
+                            <param id="0" name="Interval (seconds)">1.0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Add to" sid="3795764827709734" type="System">
+                            <param id="0" name="Variable">Timer</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="0" name="Set text" sid="6377218017181323" type="TxtTimer">
+                            <param id="0" name="Text">&quot;Time: &quot; &amp; Timer</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="2400596948865911">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="1993989845263091" type="System">
+                            <param id="0" name="Variable">Timer</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Value">5</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="5891910098405704" type="TxtExtra">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="4407459478781671">
+                    <conditions>
+                        <condition id="-3" name="Is on-screen" sid="4079167571239494" type="LeftTurret" />
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="5684522327832212" type="System">
+                            <param id="0" name="Seconds">2</param>
+                        </action>
+                        <action behavior="Turret" id="1" name="Add object to target" sid="815557191202066" type="LeftTurret">
+                            <param id="0" name="Target">Player</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="2695958802838838">
+                    <conditions>
+                        <condition id="-3" name="Is on-screen" sid="2636831757932798" type="EyeTurret" />
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="4072036952265984" type="System">
+                            <param id="0" name="Seconds">2</param>
+                        </action>
+                        <action behavior="Turret" id="1" name="Add object to target" sid="803903671866933" type="EyeTurret">
+                            <param id="0" name="Target">Player</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="3509707162222997">
+                    <conditions>
+                        <condition id="-3" name="Is on-screen" sid="5736578169531523" type="DestroyTurret" />
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="816585751052404" type="System">
+                            <param id="0" name="Seconds">2</param>
+                        </action>
+                        <action behavior="Turret" id="1" name="Add object to target" sid="3309858573605362" type="DestroyTurret">
+                            <param id="0" name="Target">Player</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5994595964306783">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="5118369945029539" type="System">
+                            <param id="0" name="Interval (seconds)">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="4069687992600824" type="System">
+                            <param id="0" name="Variable">Chance</param>
+                            <param id="1" name="Value">floor(random(3))</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="7458591867940171">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="1240870045405225" type="System">
+                            <param id="0" name="Variable">Chance</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="7471845787450427" type="EyeTurret">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="4671921059547033" type="System">
+                            <param id="0" name="Seconds">2</param>
+                        </action>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="3952403339240908" type="EyeTurret">
+                            <param id="0" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5412984366551035">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="438798600551587" type="System">
+                            <param id="0" name="Interval (seconds)">4</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="1054890523819496" type="DestroyTurret">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="5857713995723769" type="System">
+                            <param id="0" name="Seconds">1</param>
+                        </action>
+                        <action behavior="Turret" id="5" name="Set enabled" sid="1307339298406865" type="DestroyTurret">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="8619736631970786" type="BallOLighning">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="3624455799698631">
+                    <conditions>
+                        <condition behavior="Turret" id="1" name="On shoot" sid="9446169004401372" type="LeftTurret" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Spawn another object" sid="9672519776455082" type="LeftTurret">
+                            <param id="0" name="Object">BossFireball</param>
+                            <param id="1" name="Layer">1</param>
+                            <param id="2" name="Image point">1</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="2223501282016974" type="LeftTurret">
+                            <param id="0" name="Animation">&quot;Shoot&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="0" name="Play" sid="4466690786340746" type="Audio">
+                            <param id="0" name="Audio file">SFX1</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6623391859691564">
+                    <conditions>
+                        <condition behavior="Turret" id="1" name="On shoot" sid="5883994776648912" type="EyeTurret" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Spawn another object" sid="8002267588615916" type="EyeTurret">
+                            <param id="0" name="Object">TurretLaser</param>
+                            <param id="1" name="Layer">1</param>
+                            <param id="2" name="Image point">1</param>
+                        </action>
+                        <action id="0" name="Play" sid="3435220604880619" type="Audio">
+                            <param id="0" name="Audio file">Lazer Fire 1</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="1987880345585961">
+                    <conditions>
+                        <condition behavior="Turret" id="1" name="On shoot" sid="8277909013952155" type="DestroyTurret" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Spawn another object" sid="3731554626726691" type="DestroyTurret">
+                            <param id="0" name="Object">DestroyGround</param>
+                            <param id="1" name="Layer">1</param>
+                            <param id="2" name="Image point">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="7108835454053205" type="BallOLighning">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="7285095894952769" type="BallOLighning">
+                            <param id="0" name="Animation">&quot;Default&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="0" name="Play" sid="8283725062843404" type="Audio">
+                            <param id="0" name="Audio file">Lazer Ricochet</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8847084231166354">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="754792765656817" type="DestroyGround">
+                            <param id="0" name="Object">BlockGrass</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="3508013150834053" type="BlockGrass" />
+                    </actions>
+                </event-block>
+                <event-block sid="6103046608961762">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="2868113349454077" type="DestroyGround">
+                            <param id="0" name="Object">Block</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="5691845289098687" type="Block" />
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="6958405848856787" title="GravityFlip">
+            <sub-events>
+                <event-block sid="9636769834141606">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="2042651616658376" type="Player">
+                            <param id="0" name="Object">GravityFlip</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Platform" id="5" name="Set gravity" sid="667427101215581" type="Player">
+                            <param id="0" name="Gravity">-1500</param>
+                        </action>
+                        <action id="8" name="Set flipped" sid="3734906091785941" type="Player">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="8796806459227326" type="System">
+                            <param id="0" name="Variable">IsFlipped</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8457504171389295">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="5709736767436588" type="Player">
+                            <param id="0" name="Object">GravityNormal</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Platform" id="5" name="Set gravity" sid="6536073654229187" type="Player">
+                            <param id="0" name="Gravity">1500</param>
+                        </action>
+                        <action id="8" name="Set flipped" sid="4718921971840073" type="Player">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="7362141397161354" type="System">
+                            <param id="0" name="Variable">IsFlipped</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="6294215750751778" title="Quit">
+            <sub-events>
+                <event-block sid="3840462043943594">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="3559272829663655" type="Keyboard">
+                            <param id="0" name="Key">27</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="7799708449860067" type="YesButton">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="6907669877784563" type="NoButton">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="9424755225903549" type="TxtLeave">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action behavior="Platform" id="11" name="Set enabled" sid="1392232606470368" type="Player">
+                            <param id="0" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6018621765474678">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="1123480756782651" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">YesButton</param>
+                        </condition>
+                        <condition id="-9" name="Is visible" sid="3522157938319916" type="YesButton" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="1713052743671836" type="Audio">
+                            <param id="0" name="Audio file">Menu Click</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                        <action id="-2" name="Go to layout" sid="6993547129667119" type="System">
+                            <param id="0" name="Layout">Start</param>
+                        </action>
+                        <action id="-28" name="Set canvas size" sid="2774801020697122" type="System">
+                            <param id="0" name="Width">1280</param>
+                            <param id="1" name="Height">720</param>
+                        </action>
+                        <action behavior="Platform" id="11" name="Set enabled" sid="1149555862842075" type="Player">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6918444170643529">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="7375902995765232" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">NoButton</param>
+                        </condition>
+                        <condition id="-9" name="Is visible" sid="7885756789350909" type="NoButton" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="2635864034932471" type="Audio">
+                            <param id="0" name="Audio file">Menu Click</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="3589448715344786" type="YesButton">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="6251686793054981" type="NoButton">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="5703309982997361" type="TxtLeave">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action behavior="Platform" id="11" name="Set enabled" sid="2479738700504054" type="Player">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+    </events>
+</c2eventsheet>

@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>esStart</name>
+    <events>
+        <variable constant="0" name="LevelBeat" sid="7713794429142911" static="0" type="number">0</variable>
+        <event-group description="" sid="3138556136193326" title="LocalStorage">
+            <sub-events>
+                <event-block sid="6567570079486883">
+                    <conditions>
+                        <condition id="-2" name="On start of layout" sid="4196750851797906" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Check item exists" sid="7505412409107845" type="LocalStorage">
+                            <param id="0" name="Key">&quot;LevelBeat&quot;</param>
+                        </action>
+                        <action id="5" name="Check item exists" sid="5699716189024718" type="LocalStorage">
+                            <param id="0" name="Key">&quot;BestTime&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5400737425125495">
+                    <conditions>
+                        <condition id="10" name="On item missing" sid="4097998038002617" type="LocalStorage">
+                            <param id="0" name="Key">&quot;LevelBeat&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set item" sid="7121330651165983" type="LocalStorage">
+                            <param id="0" name="Key">&quot;LevelBeat&quot;</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8267578267323286">
+                    <conditions>
+                        <condition id="10" name="On item missing" sid="4274422602416019" type="LocalStorage">
+                            <param id="0" name="Key">&quot;BestTime&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set item" sid="2836251084657967" type="LocalStorage">
+                            <param id="0" name="Key">&quot;BestTime&quot;</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="3346081282861768">
+                    <conditions>
+                        <condition id="9" name="On item exists" sid="2091818985236372" type="LocalStorage">
+                            <param id="0" name="Key">&quot;LevelBeat&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Get item" sid="3439216762261073" type="LocalStorage">
+                            <param id="0" name="Key">&quot;LevelBeat&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8247538457901116">
+                    <conditions>
+                        <condition id="9" name="On item exists" sid="6534756855433988" type="LocalStorage">
+                            <param id="0" name="Key">&quot;BestTime&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="1" name="Get item" sid="6612739679560283" type="LocalStorage">
+                            <param id="0" name="Key">&quot;BestTime&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8131502913008242">
+                    <conditions>
+                        <condition id="1" name="On item get" sid="7615803361839417" type="LocalStorage">
+                            <param id="0" name="Key">&quot;LevelBeat&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="4554944262076587" type="System">
+                            <param id="0" name="Variable">LevelBeat</param>
+                            <param id="1" name="Value">LocalStorage.ItemValue</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="603980261407222">
+                    <conditions>
+                        <condition id="1" name="On item get" sid="3401269489063568" type="LocalStorage">
+                            <param id="0" name="Key">&quot;BestTime&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="397896787809783" type="System">
+                            <param id="0" name="Variable">BestTime</param>
+                            <param id="1" name="Value">LocalStorage.ItemValue</param>
+                        </action>
+                        <action id="0" name="Set text" sid="2057676720182934" type="TxtBestTime">
+                            <param id="0" name="Text">&quot;Record: &quot; &amp; BestTime</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="290191190230471" title="Button">
+            <sub-events>
+                <event-block sid="1039142130336951">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="5184024278959663" type="System">
+                            <param id="0" name="Variable">LevelBeat</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="600746714893221" type="Level0">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="4347627930682491">
+                            <conditions>
+                                <condition id="6" name="On object clicked" sid="569177760435314" type="Mouse">
+                                    <param id="0" name="Mouse button">0</param>
+                                    <param id="1" name="Click type">0</param>
+                                    <param id="2" name="Object clicked">Level0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Go to layout" sid="8833775478784108" type="System">
+                                    <param id="0" name="Layout">Level_00</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="9542812976489182" type="System">
+                                    <param id="0" name="Variable">Layout</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action behavior="ScrollTo" id="1" name="Set enabled" sid="1948591810328336" type="Player">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="382451362703111" type="System">
+                                    <param id="0" name="Variable">IsFlipped</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="0" name="Play" sid="9584789079311845" type="Audio">
+                                    <param id="0" name="Audio file">Menu Click</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">0</param>
+                                    <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="5843661574102626">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="1893257641511591" type="System">
+                            <param id="0" name="Variable">LevelBeat</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="4525865754592029" type="Level1">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="8119733970616817">
+                            <conditions>
+                                <condition id="6" name="On object clicked" sid="8964216357706404" type="Mouse">
+                                    <param id="0" name="Mouse button">0</param>
+                                    <param id="1" name="Click type">0</param>
+                                    <param id="2" name="Object clicked">Level1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Go to layout" sid="5458102072187174" type="System">
+                                    <param id="0" name="Layout">Level_01</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="6940202782294948" type="System">
+                                    <param id="0" name="Variable">Layout</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action behavior="ScrollTo" id="1" name="Set enabled" sid="8976041154103618" type="Player">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="7070994833985202" type="System">
+                                    <param id="0" name="Variable">IsFlipped</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="0" name="Play" sid="8479721164912883" type="Audio">
+                                    <param id="0" name="Audio file">Menu Click</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">0</param>
+                                    <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="6994613344428496">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="2228700309981509" type="System">
+                            <param id="0" name="Variable">LevelBeat</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="6541567753624212" type="Level2">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="1647114625551366">
+                            <conditions>
+                                <condition id="6" name="On object clicked" sid="5824949911679581" type="Mouse">
+                                    <param id="0" name="Mouse button">0</param>
+                                    <param id="1" name="Click type">0</param>
+                                    <param id="2" name="Object clicked">Level2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Go to layout" sid="956286119585711" type="System">
+                                    <param id="0" name="Layout">Level_02</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="7125673809119606" type="System">
+                                    <param id="0" name="Variable">Layout</param>
+                                    <param id="1" name="Value">2</param>
+                                </action>
+                                <action behavior="ScrollTo" id="1" name="Set enabled" sid="7082277047476895" type="Player">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="7021207248401885" type="System">
+                                    <param id="0" name="Variable">IsFlipped</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="0" name="Play" sid="6677285110642601" type="Audio">
+                                    <param id="0" name="Audio file">Menu Click</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">0</param>
+                                    <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="7464441610953068">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="364487484182989" type="System">
+                            <param id="0" name="Variable">LevelBeat</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">4</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="8009711343855536" type="Level3">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="3712560090877761">
+                            <conditions>
+                                <condition id="6" name="On object clicked" sid="125133787154493" type="Mouse">
+                                    <param id="0" name="Mouse button">0</param>
+                                    <param id="1" name="Click type">0</param>
+                                    <param id="2" name="Object clicked">Level3</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Go to layout" sid="3656233683400435" type="System">
+                                    <param id="0" name="Layout">Level_03</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="4033136426013918" type="System">
+                                    <param id="0" name="Variable">Layout</param>
+                                    <param id="1" name="Value">3</param>
+                                </action>
+                                <action behavior="ScrollTo" id="1" name="Set enabled" sid="4168217228903406" type="Player">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="6369718176195082" type="System">
+                                    <param id="0" name="Variable">IsFlipped</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="0" name="Play" sid="5798280038441014" type="Audio">
+                                    <param id="0" name="Audio file">Menu Click</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">0</param>
+                                    <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="1167106440917283">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="1685862601118511" type="System">
+                            <param id="0" name="Variable">LevelBeat</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">5</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="2968377459381494" type="BossButton">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="1010392437280085">
+                            <conditions>
+                                <condition id="6" name="On object clicked" sid="9288523012219916" type="Mouse">
+                                    <param id="0" name="Mouse button">0</param>
+                                    <param id="1" name="Click type">0</param>
+                                    <param id="2" name="Object clicked">BossButton</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Go to layout" sid="3279140377317004" type="System">
+                                    <param id="0" name="Layout">Level_Boss</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="4665029180933733" type="System">
+                                    <param id="0" name="Variable">Layout</param>
+                                    <param id="1" name="Value">4</param>
+                                </action>
+                                <action behavior="ScrollTo" id="1" name="Set enabled" sid="9012257027731711" type="Player">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="3623862685571704" type="System">
+                                    <param id="0" name="Variable">BossLevel</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="0" name="Play" sid="6399802709016884" type="Audio">
+                                    <param id="0" name="Audio file">Menu Click</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">0</param>
+                                    <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="304412389487272">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="4004373623608242" type="System">
+                            <param id="0" name="Variable">LevelBeat</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">6</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="7458866923578015" type="ButtonSurvival">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="6563828333064849">
+                            <conditions>
+                                <condition id="6" name="On object clicked" sid="9199747680457734" type="Mouse">
+                                    <param id="0" name="Mouse button">0</param>
+                                    <param id="1" name="Click type">0</param>
+                                    <param id="2" name="Object clicked">ButtonSurvival</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Go to layout" sid="777726239555815" type="System">
+                                    <param id="0" name="Layout">Level_Extra</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="4027037113294897" type="System">
+                                    <param id="0" name="Variable">Layout</param>
+                                    <param id="1" name="Value">5</param>
+                                </action>
+                                <action behavior="ScrollTo" id="1" name="Set enabled" sid="3610571804392561" type="Player">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="1076008633922068" type="System">
+                                    <param id="0" name="Variable">IsFlipped</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="0" name="Play" sid="7419273441314397" type="Audio">
+                                    <param id="0" name="Audio file">Menu Click</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">0</param>
+                                    <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="61138929574924">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="1115575568253286" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">PlayButton</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="7258520724271359" type="System">
+                            <param id="0" name="Layout">LevelSelect</param>
+                        </action>
+                        <action id="0" name="Play" sid="179164955962764" type="Audio">
+                            <param id="0" name="Audio file">Menu Click</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8374946332215152">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="8438531943410852" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">TutorialButton</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="9914641727256031" type="System">
+                            <param id="0" name="Layout">Tutorial_01</param>
+                        </action>
+                        <action behavior="ScrollTo" id="1" name="Set enabled" sid="4945966033425762" type="Player">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="0" name="Play" sid="6339702658433214" type="Audio">
+                            <param id="0" name="Audio file">Menu Click</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="7236884042075119">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="5714845584562021" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">BackButton</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="9496057104605471" type="System">
+                            <param id="0" name="Layout">Start</param>
+                        </action>
+                        <action id="0" name="Play" sid="3183597607555573" type="Audio">
+                            <param id="0" name="Audio file">Menu Click</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="9718403385976726">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="1309867940865649" type="System">
+                            <param id="0" name="Variable">LevelBeat</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">6</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="5080078564316742" type="TxtInfo">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+    </events>
+</c2eventsheet>

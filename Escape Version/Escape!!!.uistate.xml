@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2uistate>
+    <!--This is a UI state file - its content describes the user interface settings when the project was last open.
+It is entirely optional and the project will load without it.  If you are placing the project under source control,
+you probably do not want to add any .uistate.xml files to the repository.-->
+    <configurations>
+        <active>
+            <configuration name="HTML5" />
+        </active>
+        <display name="HTML5" />
+    </configurations>
+    <open-tabs>
+        <layout order="2">Start</layout>
+        <layout order="3">LevelSelect</layout>
+        <layout order="4">Tutorial_01</layout>
+        <layout active="1" order="5">Level_00</layout>
+        <layout order="6">Level_01</layout>
+        <layout order="7">Level_02</layout>
+        <layout order="8">Level_03</layout>
+        <layout order="9">Level_Boss</layout>
+        <layout order="10">Credits</layout>
+        <layout order="11">Level_Extra</layout>
+        <event-sheet order="0">esStart</event-sheet>
+        <event-sheet order="1">esGame</event-sheet>
+    </open-tabs>
+    <properties>
+        <property expanded="1" name="About" />
+        <property expanded="1" name="Project settings" />
+        <property expanded="0" name="Window Size" />
+        <property expanded="1" name="Configuration Settings" />
+    </properties>
+    <families-expanded root="1" />
+    <folders-expanded>
+        <folder expanded="1" path="object-folder/" />
+        <folder expanded="1" path="layout-folder/" />
+        <folder expanded="1" path="event-folder/" />
+        <folder expanded="1" path="file-folder/" />
+        <folder expanded="1" path="sound-folder/" />
+        <folder expanded="1" path="music-folder/" />
+        <folder expanded="0" path="file-folder/Icons/" />
+        <folder expanded="1" path="animation-folder/Player/" />
+        <folder expanded="1" path="animation-folder/BorderSide/" />
+        <folder expanded="1" path="animation-folder/Platform/" />
+        <folder expanded="1" path="animation-folder/Door/" />
+        <folder expanded="1" path="animation-folder/TopBoundary/" />
+        <folder expanded="1" path="animation-folder/Spike/" />
+        <folder expanded="1" path="animation-folder/Cannon/" />
+        <folder expanded="1" path="animation-folder/CannonBall/" />
+        <folder expanded="1" path="animation-folder/Block/" />
+        <folder expanded="1" path="animation-folder/FallingPlatform/" />
+        <folder expanded="1" path="animation-folder/Lava/" />
+        <folder expanded="1" path="animation-folder/AnotherBlock/" />
+        <folder expanded="1" path="animation-folder/Arrow/" />
+        <folder expanded="1" path="animation-folder/RisingLava/" />
+        <folder expanded="1" path="animation-folder/BorderTop/" />
+        <folder expanded="1" path="animation-folder/ScrollTo/" />
+        <folder expanded="1" path="animation-folder/TripWireBlock/" />
+        <folder expanded="1" path="animation-folder/SlopeLeft/" />
+        <folder expanded="1" path="animation-folder/TripCannon/" />
+        <folder expanded="1" path="animation-folder/SlopeRight/" />
+        <folder expanded="1" path="animation-folder/Checkpoint/" />
+        <folder expanded="1" path="animation-folder/WideFalling/" />
+        <folder expanded="1" path="animation-folder/SmallSpike/" />
+        <folder expanded="1" path="animation-folder/SmallBlock/" />
+        <folder expanded="1" path="animation-folder/RespawnFalling/" />
+        <folder expanded="1" path="animation-folder/CheckWidePlatform/" />
+        <folder expanded="1" path="animation-folder/FireBall/" />
+        <folder expanded="1" path="animation-folder/FireBallPeak/" />
+        <folder expanded="1" path="animation-folder/FireBallBase/" />
+        <folder expanded="1" path="animation-folder/CheckPlatform/" />
+        <folder expanded="1" path="animation-folder/Logo/" />
+        <folder expanded="1" path="animation-folder/PlayButton/" />
+        <folder expanded="1" path="animation-folder/Level1/" />
+        <folder expanded="1" path="animation-folder/Level2/" />
+        <folder expanded="1" path="animation-folder/Level3/" />
+        <folder expanded="1" path="animation-folder/BigArrow/" />
+        <folder expanded="1" path="animation-folder/GoTo2/" />
+        <folder expanded="1" path="animation-folder/GoTo3/" />
+        <folder expanded="1" path="animation-folder/Speedup/" />
+        <folder expanded="1" path="animation-folder/Stone/" />
+        <folder expanded="1" path="animation-folder/SetLayout1/" />
+        <folder expanded="1" path="animation-folder/SetLayout3/" />
+        <folder expanded="1" path="animation-folder/SetLayout2/" />
+        <folder expanded="1" path="animation-folder/BlockGrass/" />
+        <folder expanded="1" path="animation-folder/TreeTrunk/" />
+        <folder expanded="1" path="animation-folder/Background/" />
+        <folder expanded="1" path="animation-folder/TutorialButton/" />
+        <folder expanded="1" path="animation-folder/BackButton/" />
+        <folder expanded="1" path="animation-folder/Background3/" />
+        <folder expanded="1" path="animation-folder/Background2/" />
+        <folder expanded="1" path="animation-folder/GoTo1/" />
+        <folder expanded="1" path="animation-folder/SetLayout0/" />
+        <folder expanded="1" path="animation-folder/GravityFlip/" />
+        <folder expanded="1" path="animation-folder/GravityNormal/" />
+        <folder expanded="1" path="animation-folder/BossGround/" />
+        <folder expanded="1" path="animation-folder/LeftTurret/" />
+        <folder expanded="1" path="animation-folder/SetLayout4/" />
+        <folder expanded="1" path="animation-folder/BossFireball/" />
+        <folder expanded="1" path="animation-folder/TurretLaser/" />
+        <folder expanded="1" path="animation-folder/EyeTurret/" />
+        <folder expanded="1" path="animation-folder/DestroyGround/" />
+        <folder expanded="1" path="animation-folder/DestroyTurret/" />
+        <folder expanded="1" path="animation-folder/Warning/" />
+        <folder expanded="1" path="animation-folder/BossSky/" />
+        <folder expanded="1" path="animation-folder/Background4/" />
+        <folder expanded="1" path="animation-folder/GoToBoss/" />
+        <folder expanded="1" path="animation-folder/Explosion/" />
+        <folder expanded="1" path="animation-folder/Pole/" />
+        <folder expanded="1" path="animation-folder/Pole2/" />
+        <folder expanded="1" path="animation-folder/BossButton/" />
+        <folder expanded="1" path="animation-folder/YesButton/" />
+        <folder expanded="1" path="animation-folder/NoButton/" />
+        <folder expanded="1" path="animation-folder/BallOLighning/" />
+        <folder expanded="1" path="animation-folder/SetLayout5/" />
+        <folder expanded="1" path="animation-folder/ButtonSurvival/" />
+        <folder expanded="1" path="animation-folder/GoTo0/" />
+        <folder expanded="1" path="animation-folder/Level0/" />
+    </folders-expanded>
+</c2uistate>
